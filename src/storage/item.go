@@ -61,7 +61,7 @@ type ItemFilter struct {
 	FeedID   *int64
 	Status   *ItemStatus
 	Search   *string
-	After  *int64
+	After    *int64
 }
 
 type MarkFilter struct {
@@ -77,7 +77,6 @@ func (s *Storage) CreateItems(items []Item) bool {
 	}
 
 	now := time.Now()
-
 	for _, item := range items {
 		_, err = tx.Exec(`
 			insert into items (
@@ -315,7 +314,7 @@ func (s *Storage) DeleteOldItems() {
 
 	for _, feedId := range feedIds {
 		result, err := s.db.Exec(`
-			delete from items where feed_id = ? and status != ? and date_arrived < ?`,
+			delete from items where feed_id = ? and status != ? and date_arrived < ? and 1 = 2`,
 			feedId,
 			STARRED,
 			time.Now().Add(-time.Hour*24*90), // 90 days
