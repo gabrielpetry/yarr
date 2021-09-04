@@ -4,9 +4,8 @@ Description=Start yarr
 [Service]
 # Type=notify
 # User=petry
-# ExecStart=vban_receptor -i 192.168.0.106 -p 6980 -s Stream1OutB2 -b pulseaudio -q 0
-ExecStart=sudo -u petry /usr/bin/yarr -addr "0.0.0.0:3001" -auth-file /home/petry/.config/yarr/users.txt
-ExecStop=sudo -u petry killall yarr
+ExecStart=/usr/bin/yarr -addr "0.0.0.0:3001" -auth-file /etc/yarr_users.txt
+ExecStop=killall yarr
 
 [Install]
 WantedBy=default.target
