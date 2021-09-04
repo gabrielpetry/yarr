@@ -2,8 +2,6 @@
 Description=Start yarr
 
 [Service]
-# Type=notify
-# User=petry
 ExecStart=/usr/bin/yarr -addr "0.0.0.0:3001" -auth-file /etc/yarr_users.txt
 ExecStop=killall yarr
 
