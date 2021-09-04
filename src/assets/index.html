@@ -328,11 +328,27 @@
                     <time>{{ formatDate(itemSelectedDetails.date) }}</time>
                 </div>
                 <hr>
-                <div v-if="!itemSelectedReadability">
-                    <img :src="itemSelectedDetails.image" v-if="itemSelectedDetails.image" class="mb-3">
-                    <audio class="w-100" controls v-if="itemSelectedDetails.podcast_url" :src="itemSelectedDetails.podcast_url"></audio>
+                <div v-if="itemSelectedDetails.link.indexOf('fitgirl-repacks') != -1">
+                     <iframe class="w-100" style='height: 80vh' v-bind:src="itemSelectedDetails.link"></iframe> 
                 </div>
-                <div v-html="itemSelectedContent"></div>
+                <div v-else-if="itemSelectedDetails.link.indexOf('youtube') != -1">
+                            <iframe 
+                            width="1280px"
+                            height="720px"
+                            v-bind:src="'https://www.youtube.com/embed/' + itemSelectedDetails.guid.replace('yt:video:', '') + '?&autoplay=1&vq=hd1080'"
+                            title="YouTube video player"
+                            frameborder="0"
+                            allow="autoplay; picture-in-picture"
+                            allowfullscreen autoplay
+                        ></iframe>
+                </div>
+                <div v-else>
+                    <div v-if="!itemSelectedReadability">
+                        <img :src="itemSelectedDetails.image" v-if="itemSelectedDetails.image" class="mb-3">
+                        <audio class="w-100" controls v-if="itemSelectedDetails.podcast_url" :src="itemSelectedDetails.podcast_url"></audio>
+                    </div>
+                    <div v-html="itemSelectedContent"></div>
+                </div>
             </div>
         </div>
         <modal :open="!!settings" @hide="settings = ''">

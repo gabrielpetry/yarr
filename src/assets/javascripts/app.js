@@ -44,6 +44,9 @@ Vue.component('drag', {
       document.addEventListener('mouseup', onMouseUp)
     })
   },
+  updated: function() {
+    console.log('updated')
+  }
 })
 
 Vue.component('dropdown', {
